@@ -1,0 +1,605 @@
+jQuery.fn.reset = function () {
+  $(this).each (function() { this.reset(); });
+};
+jQuery.fn.cerrar=function(){
+	$(this).hide("slow",function(){$(this).empty(); });
+};
+
+$(document).ready(function() 
+{
+	/******************************************
+	 * Entrar					   		  *
+	 ******************************************/
+	$(".entrada").click(function()
+	{
+		//location="../../iniciars.php";
+		location="privado/sistema/vista/usuario/iniciars.php";
+		//location="../../../paginas_blancas/pagina_cau/sistema/vista/usuario/iniciars.php";
+		$("#msgEntrada").dialog("open");			 
+	});
+	
+	/******************************************
+	 * SALIR						   		  *
+	 ******************************************/
+	$(".salida").click(function()
+			{
+				$("#msgSalida").dialog("open");			 
+			});
+			
+			$("#msgSalida").dialog(
+			{
+				title: "Salir de la aplicacion.",
+				resizable: false,
+				bgiframe:true,
+				autoOpen: false,
+				modal: true,
+				buttons:
+				{
+					"No": function() 
+					{
+						$(this).dialog('close');
+					}
+					,
+					"Si": function()
+					{
+						$(this).dialog('close');
+						location="../../index.php";
+						//location="../controlador/sesion.php?salir=cerrar";
+					}
+				}
+			}).html("\u00BFDesea realmente salir de la aplicaci\u00f3n?");
+	
+	
+	/******************************************
+	 * CAMBIO DE CONTRASEÑA		  		      *
+	 ******************************************/
+	$(".cambioContrasena").click(function()
+	{
+		$.post("usuario/cambiarClave.php",function(data)
+		{
+			$.getScript("../../assets/js/usuario/cambiarClave.js");
+			$("#contenido").html(data);
+		});
+		
+		// $("#cambiarClave").dialog("open");		 
+	});
+	/******************************************
+	 * MENU PRINCIPAL						  *
+	 ******************************************/
+	
+	 $("ul.sf-menu.sf-vertical").superfish(
+	 { 
+		animation: {opacity:'show'}, 
+	    delay:100,
+	    dropShadows:false 
+	 });
+	/******************************************
+	 * MENU - CEI   						  *
+	 ******************************************/
+	 /*menuRegistrarCENSO*/
+	 $("#menuRegistrarCENSO").click(function()
+	 {
+		 $("div#error").cerrar();
+		 $.ajax
+		 ({		 
+			 type: "POST",
+			 url: "../controlador/censo/censo.Control.php?opc=0",
+			 dataType:"json",
+			 data:"",
+			 async:true,
+			 success: function(data)
+			 {
+			 	//alert(data);
+			 	$.post(data.vista,function(dato)
+				{
+					$.getScript("../../assets/js/censo/censoOpcionesGenerales.js");
+					$.getScript("../../assets/js/combos/combos.js");
+					$("#contenido").html(dato);
+				});
+			 }
+		 });
+	 });
+	 /*CONSULTAR CEI*/
+	 $("#menuConsultarCENSO").click(function()
+	 {									   
+		 $("div#error").cerrar();
+		 $.ajax
+		 ({		 
+			 type: "POST",
+			 url: "../controlador/censo/censo.Control.php?opc=7",
+			 dataType:"json",
+			 data:"",
+			 async:true,
+			 success: function(data)
+			 {
+			 	//alert(data);
+			 	$.post(data.vista,function(dato)
+				{
+					$.getScript("../../assets/js/censo/censoOpcionesGenerales.js");
+					$("#contenido").html(dato);
+				});
+			 }
+		 });
+	 });
+	 
+	 /*****************************************************
+	  * MENU - Mantenimiento - Tipo de Movimiento     	  *
+	  *****************************************************/
+		
+		 $("#menuRegistrarTipoMovimiento").click(function()
+		 {   
+			$("div#error").cerrar();									   
+			 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=4",function(data)
+			 {	 
+				//alert(data);
+				 $.post(data,function(datos)
+				 {
+					 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+					 
+					 $("#contenido").html(datos);
+				 });			 
+	             
+	         });
+				 
+		 });
+
+		 
+	 
+	 	/*****************************************************
+		 * MENU - Mantenimiento - Estructura - Dependencia   *
+		 *****************************************************/
+		 $("#menuRegistrarDependencia").click(function()
+			{alert("ddsd");
+					 $("div#error").cerrar();									   
+					 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=0",function(data)
+					 {	 
+						//alert(data);
+						 $.post(data,function(datos)
+						 {
+							 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+							 
+							 $("#contenido").html(datos);
+						 });			 
+			             
+			         });
+						 
+				 });
+		 		 
+		 /*****************************************************
+		  * MENU - Mantenimiento - Estructura - Direccion     *
+		  *****************************************************/
+	
+		 $("#menuRegistrarDireccion").click(function()
+				 {
+					 $("div#error").cerrar();									   
+					 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=1",function(data)
+					 {	 
+						//alert(data);
+						 $.post(data,function(datos)
+						 {
+							 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+							 $.getScript("../../assets/js/combos/combos.js");
+							 $("#contenido").html(datos);
+						 });			 
+			             
+			         });
+						 
+				 });
+			 
+			 /*****************************************************
+			  * MENU - Mantenimiento - Estructura - Unidad        *
+			  *****************************************************/
+				 $("#menuRegistrarUnidad").click(function()
+				 
+					 {
+					 $("div#error").cerrar();									   
+					 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=2",function(data)
+					 {	 
+						
+						 $.post(data,function(datos)
+						 {
+							 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+							 $.getScript("../../assets/js/combos/combos.js");
+							 $("#contenido").html(datos);
+						 });			 
+			             
+			         });
+						 
+				 } );
+				 /*****************************************************
+				  * MENU - Mantenimiento - Estructura - Coordinacion  *
+				  *****************************************************/
+				 $("#menuRegistrarCoordinacion").click(function()
+					{
+						 $("div#error").cerrar();									   
+						 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=3",function(data)
+						 {	 
+							$.post(data,function(datos)
+							 {
+								 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+								 $.getScript("../../assets/js/combos/combos.js");
+								 $("#contenido").html(datos);
+							 });			 
+				             
+				         });
+							 
+					 });
+					 
+					 /*****************************************************
+					  * MENU - Mantenimiento - Clasificación de Bienes - SubGrupo *
+					  *****************************************************/
+					 $("#menuRegistrarSubGrupo").click(function()
+					  {
+								 $("div#error").cerrar();									   
+								 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=7",function(data)
+								 {	 
+									//alert(data);
+									 $.post(data,function(datos)
+									 {
+										 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+										 
+										 $("#contenido").html(datos);
+									 });			 
+						             
+						         });
+									 
+						});
+			 
+					 /*****************************************************
+					  * MENU - Mantenimiento - Clasificación de Bienes - Seccion *
+					  *****************************************************/
+					 $("#menuRegistrarSeccion").click(function()
+                      {
+							 $("div#error").cerrar();									   
+							 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=5",function(data)
+							 {	 
+								//alert(data);
+								 $.post(data,function(datos)
+								 {
+									 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+									 $.getScript("../../assets/js/combos/combos.js");
+									 
+									 $("#contenido").html(datos);
+								 });			 
+					             
+					         });
+								 
+						}); 
+              												                            
+
+					 
+					 /*****************************************************
+					  * MENU - REGISTRAR ACTIVOS *
+					  *****************************************************/
+					 $("#menuRegistrarActivos").click(function()
+                      {
+							 $("div#error").cerrar();									   
+							 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=6",function(data)
+							 {	 
+								//alert(data);
+								 $.post(data,function(datos)
+								 {
+									 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+									 $.getScript("../../assets/js/combos/combos.js");
+									 
+									 $("#contenido").html(datos);
+								 });			 
+					             
+					         });
+								 
+						}); 
+					 
+					 
+					 /*****************************************************
+					  * MENU - REGISTRAR PROVEEDOR *
+					  *****************************************************/
+					 $("#menuRegistrarProveedor").click(function()
+                      {
+							 $("div#error").cerrar();									   
+							 $.post("../controlador/mantenimiento/mantenimientoControl.php?opc=8",function(data)
+							 {	 
+								//alert(data);
+								 $.post(data,function(datos)
+								 {
+									 $.getScript("../../assets/js/mantenimiento/mantenimientoOpcionesGenerales.js");
+									
+									 
+									 $("#contenido").html(datos);
+								 });			 
+					             
+					         });
+								 
+						}); 
+              				 
+					 
+					 
+					 /********************************************************
+					  * MENU - REGISTRAR ASIGNACION DE CONTROL DE INVENTARIO *
+					  ********************************************************/
+					 $("#menuRegistrarAsignacionInventario").click(function()
+							 {
+						 $("div#error").cerrar();
+						 $.ajax
+						 ({		 
+							 type: "POST",
+							 url: "../controlador/asignacion/asignacionControl.php?opc=0",
+							 dataType:"json",
+							 data:"",
+							 async:true,
+							 success: function(data)
+							 {
+							 	//alert(data);
+							 	$.post(data.vista,function(dato)
+								{
+									$.getScript("../../assets/js/asignacion/asignacionOpcionesGenerales.js");
+									$.getScript("../../assets/js/combos/combos.js");
+									$("#contenido").html(dato);
+								});
+							 }
+						 });
+					 });
+							 
+							 /* {
+								// alert('sdd');
+								 $("div#error").cerrar();
+								 $.ajax
+								 ({		 
+									 type: "POST",
+									 url: "../controlador/asignacion/asignacionControl.php?opc=0",
+									 dataType:"json",
+									 data:"",
+									 async:true,
+									 success: function(data)
+									 {
+									 	//alert(data.vista);
+									 	$.post(data.vista,function(dato)
+										{
+											$.getScript("../../assets/js/asignacion/asignacionOpcionesGenerales.js");
+											$.getScript("../../assets/js/combos/combos.js");
+											$("#contenido").html(dato);
+										});
+									 }
+								 });
+							  }*/
+					 
+					 
+					 
+					 
+					 /********************************************************
+					  * MENU - REGISTRAR ASIGNACION DE CONTROL DE INVENTARIO *
+					  ********************************************************/
+					 $("#menuRegistrarMovimientoInventario").click(function()
+							 {
+								// alert('sdd');
+								 $("div#error").cerrar();
+								 $.ajax
+								 ({		 
+									 type: "POST",
+									 url: "../controlador/movimiento/movimientoControl.php?opc=0",
+									 dataType:"json",
+									 data:"",
+									 async:true,
+									 success: function(data)
+									 {
+									 	//alert(data.vista);
+									 	$.post(data.vista,function(dato)
+										{
+											$.getScript("../../assets/js/movimiento/movimientoOpcionesGenerales.js");
+											$.getScript("../../assets/js/combosE_P_D.js");
+											$("#contenido").html(dato);
+										});
+									 }
+								 });
+							  });
+						 
+					 
+					 
+	 /******************************************
+	 * MENU - CEI   						  *
+	 ******************************************/
+	 /*EVALUACION CEI*/
+	 $("#menuRegistrarEvaluacionCEI").click(function()
+	 {									   
+		 $("div#error").cerrar();
+		 $.post("../controlador/evaluacionCEI/evaluacionCEI.Control.php?opc=0",function(data)
+		 {
+			
+			 $.post(data,function(pantalla)
+			 {
+				 $.getScript("../../assets/js/evaluacionCEI/evaluacionOpcionesGenerales.js");
+				 $("#contenido").html(pantalla);
+			 });
+		 });
+	 });
+	 
+	 $("#menuConsultarEvaluacionCEI").click(function()
+			 {									   
+				 $("div#error").cerrar();
+				 $.post("../controlador/evaluacionCEI/evaluacionCEI.Control.php?opc=2",function(data)
+				 {
+					
+					 $.post(data,function(pantalla)
+					 {
+						 $.getScript("../../assets/js/evaluacionCEI/evaluacionOpcionesGenerales.js");
+						 $("#contenido").html(pantalla);
+					 });
+				 });
+			 });
+	 
+	 
+	 /******************************************
+	  * MENU - CEI   						  *
+	  ******************************************/
+	 /*GENERAR ACTA */
+	 $("#menuGenerarActaCEI").click(function()
+	 {		
+		 $("div#error").cerrar();
+		 $.post("../controlador/actasCEI/actasCEI.Control.php?opc=0",function(data)
+		 {
+			 $.post(data.vista,function(pantalla)
+			 {
+				 $.getScript("../../assets/js/actasCEI/actasOpcionesGenerales.js");
+				 $("#contenido").html(pantalla);
+			 });
+		 },"json");
+	 }); 
+	 
+	 $("#menuConsultarActaCEI").click(function()
+	 {		
+		 $("div#error").cerrar();
+		 $.post("../controlador/actasCEI/actasCEI.Control.php?opc=1",function(data)
+		 {
+			 $.post(data.vista,function(pantalla)
+			 {
+				 $.getScript("../../assets/js/actasCEI/actasOpcionesGenerales.js");
+				 $("#contenido").html(pantalla);
+			 });
+		 },"json");
+	 }); 
+	 /******************************************
+	 * MENU - CEI   						  *
+	 ******************************************/
+	 /*REPORTES */
+	 $("#menuListadoReportes").click(function()
+	 {									   
+		 $("div#error").cerrar();
+		 $.post("../controlador/reportes/listadoReportes.Control.php?opc=0",function(data)
+		 {
+			
+			 $.post(data.vista,{datosComboReporte:data.datosComboReporte,datosComboPersonal:data.datosComboPersonal},function(pantalla)
+			 {
+				 $.getScript("../../assets/js/reportes/listadoReportesOpcionesGenerales.js");
+				 $("#contenido").html(pantalla);
+			 });
+		 },"json");
+	 });
+	 /*VIRGINIA*/
+	 $("#menuRegistrarUsuario").click(function()
+	 {
+		// alert('sdd');
+		 $("div#error").cerrar();
+		 $.ajax
+		 ({		 
+			 type: "POST",
+			 url: "../controlador/usuario/usuarios.Control.php?opc=1",
+			 dataType:"json",
+			 data:"",
+			 async:true,
+			 success: function(data)
+			 {
+			 	//alert(data.vista);
+			 	$.post(data.vista,function(dato)
+				{
+					$.getScript("../../assets/js/usuario/usuarioOpcionesGenerales.js");
+					$("#contenido").html(dato);
+				});
+			 }
+		 });
+	  });
+	  $("#menuConsultarUsuario").click(function()
+			 {
+		
+				 $("div#error").cerrar();
+				 $.ajax
+				 ({		 
+					 type: "POST",
+					 url: "../controlador/usuario/usuarios.Control.php?opc=3",
+					 dataType:"json",
+					 data:"",
+					 async:true,
+					 success: function(data)
+					 {
+					 	//alert(data.vista);
+					 	$.post(data.vista,function(dato)
+						{
+							$.getScript("../../assets/js/usuario/usuarioOpcionesGenerales.js");
+							$.getScript("../../assets/js/jquery.paginate.js");
+							$("#contenido").html(dato);
+						});
+					 }
+				 });
+			  });
+		
+		$("#menuAuditoriaUsuario").click(function()
+		{ 
+			$("div#error").cerrar();
+			
+			$.ajax
+			({		 
+				type: "POST",
+				url: "../controlador/censo/censo.Control.php?opc=10",
+				dataType:"json",
+				data:"",
+				async:true,
+				success: function(data)
+				{
+					$.post(data.vista,function(dato)
+					{
+						$.getScript("../../assets/js/censo/censoOpcionesGenerales.js");
+						$.getScript("../../assets/js/jquery.paginate.js");
+						
+						$("#contenido").html(dato);
+						
+						$.post("../controlador/censo/censo.Control.php?opc=11", function(dato2)
+						{
+							$("#cbo_1_nombreUsuario").html(dato2);
+						});
+					});
+				}
+			});
+		});
+
+
+	/******************************************
+	 * MENU - REPORTES -ANDRES  			  *
+	 ******************************************/
+	 /*menuRegistrarCENSO*/
+	 $("#menuReportesCENSO").click(function()
+	 {
+		 $("div#error").cerrar();
+		 $.ajax
+		 ({		 
+			 type: "POST",
+			 url: "../controlador/reportes/reportesControl.php?opc=0",
+			 dataType:"json",
+			 data:"",
+			 async:true,
+			 success: function(data)
+			 {
+			 	//alert(data);
+			 	$.post(data.vista,function(dato)
+				{
+					$.getScript("../../assets/js/reportes/reportesOpcionesGenerales.js");
+					$("#contenido").html(dato);
+				});
+			 }
+		 });
+	 });
+	 /******************************************
+	 * MENU - REINICIAR CLAVE -VIRGINIA   	  *
+	 ******************************************/
+		 /*menuReiniciarClave*/
+		 $("#menuReiniciarClave").click(function()
+		 {//alert("ffffffffff");
+			 $("div#error").cerrar();
+			 $.ajax
+			 ({		 
+				 type: "POST",
+				 url: "../controlador/usuario/usuarios.Control.php?opc=8",
+				 dataType:"json",
+				 data:"",
+				 async:true,
+				 success: function(data)
+				 {
+				 	//alert(data.vista);
+				 	$.post(data.vista,function(dato)
+					{
+						$.getScript("../../assets/js/usuario/usuarioOpcionesGenerales.js");
+						$("#contenido").html(dato);
+					});
+				 }
+			 });
+		 });
+
+
+}); /*FIN DE $(document).ready(function() */

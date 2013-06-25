@@ -1,0 +1,189 @@
+@charset "utf-8";
+/* estilos generales *******************************************************************/
+body
+{
+   font: 62.5% Verdana, Arial, sans-serif;
+   background: #200 url(custom-theme/images/ui-bg_diagonal-maze_65_a6a6a6_10x10.png) 50% 50% repeat;
+}
+input
+{
+   -moz-border-radius-topright: 4px;
+   -webkit-border-top-right-radius: 4px;
+   -moz-border-radius-bottomleft:4px;
+   -webkit-border-bottom-left-radius: 4px;
+   border:#666 inset 2px;
+}
+input:focus
+{
+   background-color: #FFCCCD;
+   -moz-border-radius-topright: 4px;
+   -webkit-border-top-right-radius: 4px;
+   -moz-border-radius-bottomleft:4px;
+   -webkit-border-bottom-left-radius: 4px;
+   /*-moz-border-radius: 4px; 
+   -webkit-border-radius: 4px;*/
+}
+input[type="submit"]
+{
+	background: #990000 url(custom-theme/images/ui-bg_gloss-wave_50_990000_500x100.png) 50% 50% repeat-x;
+	border:#900 outset 1px;
+	padding:0.2em 0.5em 0.2em 0.5em;
+	font-weight:bold;
+	color:#fff;
+}
+input[type="submit"]:hover,
+input[type="submit"]:focus
+{
+	background: #990000 url(custom-theme/images/ui-bg_gloss-wave_75_cf2020_500x100.png) 50% 50% repeat-x;
+	border:#900 inset 1px;
+	color:#fff;
+}
+table
+{
+   font-size:1.2em;
+   border-collapse:collapse;
+}
+legend
+{
+       font-size:1.2em;
+}
+/* Validacion error  ********************************************************************/
+li
+{
+	margin-left:5px;
+}
+label.error
+{
+    text-align:left;
+    color:#b00;
+	display:inline-block;
+	padding:2px 0px 2px 15px;
+	width:auto !important;
+	font-size: 1.1em !important;
+}
+input.error
+{
+	border:#900 ridge 2px;
+}
+div#error
+{
+	position:fixed;
+	display:none;
+	background:#FFF;
+	height:auto;
+	max-height:400px;
+	width:180px;
+	left:130px;
+	top:300px;
+	overflow:auto;
+	border:#900 double 6px;
+	border-right:block;
+	-moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -khtml-border-radius: 4px;
+	-moz-box-shadow: 0px 1px 10px #666, inset 1px 1px 0px #a4a4a4; /* inset creates a inner-shadow */
+    -khtml-box-shadow: 0px 1px 10px #666;
+    -webkit-box-shadow: 0px 1px 10px #666;
+	z-index: 99;
+	text-align:left;
+    color:#b00;
+	padding:0px 0px 2px 15px;
+	font-size:1.1em !important;
+}
+/* cuerpo *******************************************************************************/
+#cuerpo
+{
+	position: static;
+   	width:1000px;
+   	height:100%;
+}
+#cuerpo #banner
+{
+	position: static;
+   	width:1000px;
+   	height:135px;
+   	margin-bottom:2px;
+   	/*-moz-border-radius: 4px; 
+   	-webkit-border-radius: 4px;
+   	-ms-border-radius: 4px;*/
+   	-moz-border-radius-topright: 6px;
+   	-webkit-border-top-right-radius: 6px;
+   	-moz-border-radius-bottomleft:6px;
+   	-webkit-border-bottom-left-radius: 6px;
+   	background-image:url(../img/tope_original.png);
+}
+#cuerpo #container
+{
+	background:#fff;
+   	height:630px;
+   	margin: 0 auto;
+   	padding-top:80px;
+   	-moz-border-radius-topright: 6px;
+   	-webkit-border-top-right-radius: 6px;
+   	-moz-border-radius-bottomleft:6px;
+   	-webkit-border-bottom-left-radius: 6px; 
+}
+#cuerpo #pie
+{
+	background:#fff;
+   	margin-top:2px;
+   	padding-top:1px;
+   	width:1000px;
+   	height:20px;
+   	font-size: 1em;
+   	text-align:center;
+   	clear:both;
+   	/*-moz-border-radius: 4px; 
+   	-webkit-border-radius: 4px;
+   	-ms-border-radius: 4px;*/
+   	-moz-border-radius-topright: 6px;
+   	-webkit-border-top-right-radius: 6px;
+   	-moz-border-radius-bottomleft:6px;
+   	-webkit-border-bottom-left-radius: 6px;
+}
+/* acceso *******************************************************************************/
+fieldset.accesoF
+{
+	width:30%;
+   	/*-moz-border-radius: 4px; 
+   	-webkit-border-radius: 4px;
+   	-ms-border-radius: 4px;*/
+   	-moz-border-radius-topright: 6px;
+   	-webkit-border-top-right-radius: 6px;
+   	-moz-border-radius-bottomleft:6px;
+   	-webkit-border-bottom-left-radius: 6px;
+}
+.celda
+{
+	text-align:right;
+}
+.celda2
+{
+    text-align: left;
+}
+.item
+{ 
+    font-weight:bold;
+    font-style: italic;
+    font-size:2.5em;
+    font: Verdana;
+}
+.error
+{
+	text-align:center;
+	color:#b00;
+	font-size:11px;	
+}
+p{
+	margin: 0px auto 2px auto;
+}
+.label_titulo_tabla{ 
+	 background-color: #990000;
+     font-weight:bold; 
+	 text-align:center;
+	 padding-left:2px;
+     font-size: 1.1em;
+	 color:#fff;
+	 font-size: 16px;
+}

@@ -1,0 +1,185 @@
+$(document).ready(function()
+{
+	$(".obligatorio").html('*');
+	/*
+	 * REGISTRAR CENSO PESTAÑA:
+	 * 
+	 * 
+	 */
+
+	 $("#fechaFactura").datepicker( {
+         changeMonth : true,
+         changeYear : true
+     }, $.datepicker.regional['es']);
+     
+	 $("#fechaOrden").datepicker( {
+         changeMonth : true,
+         changeYear : true
+     }, $.datepicker.regional['es']);
+     
+
+$("#pestanaRegistrarAsignacionInventario").tabs();
+
+	$.validator.addMethod("regex",function(value,element,regexp){
+        var re= new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },"Solo caracteres alfanumericos");
+	
+
+
+
+
+	
+	// ///////////////////////////////////////////////////////////////////////
+	// Pagina => Guardar Usuario
+	// Detalle => Guardar
+	// ///////////////////////////////////////////////////////////////////////
+	$('#botonGuardarAsignacionInventario').click(function()
+	{
+		
+		$("#frmRegistrarAsignacionInventario").validate(
+		{ 
+			errorContainer: "div#error",
+	        errorLabelContainer : "div#error",
+			
+	        rules :
+		    {
+				nrocuenta:
+				{
+					required: true,
+					regex:"^[a-zA-Z0-9. áéíóúñ]+$"
+				},
+							
+				denominacion:
+				{
+					required :true,
+					regex:"^[a-zA-Z0-9]+$"
+				}				
+		       
+		     
+		    },
+		    messages :
+	    	{
+		    	nrocuenta:
+		        {
+		    		required : "<li>Número de Cuenta Obligatorio</li>",
+					regex:	   "<li>Número de Cuenta no debe tener Caracteres Especiales</li>"
+		        },
+		        
+				denominacion:
+		        {
+					required : "<li>Denominacion Obligatorio</li>",
+					regex:	   "<li>Denominacion solo Letras o Número</li>"
+		        }
+				
+	    },	        
+	    
+	    submitHandler:function()
+	    {
+	    	
+
+			
+			$.post("../controlador/asignacion/asignacionControl.php?opc=1", $("#frmRegistrarAsignacionInventario").serialize()+"&ram="+Math.random(), function(data)
+			{
+				//alert(data.error);
+				if (data.error == 0)
+				{
+					alert(data.msj);
+					$("#frmRegistrarAsignacionInventario").reset();
+				}
+				if (data.error == 1)
+				{ //alert(data.error);
+					alert(data.msj);
+																																																																																																																																																																																																																																																																																																																																																																																										
+				}
+			},"json");
+	    
+	    }
+	});
+});	
+	
+	
+    /*TABLA Modificar Productos*/
+	$("a.tablaProveedorModificar").click(function(evento)
+	{
+		intIdFila = $(this).parents("tr").find("td").eq(1).html();
+		id_Rif = $(this).parents("tr").find("td").eq(1).html();
+		$("#intIdFila").val(intIdFila);		
+	
+	
+		cbo_rif = $(this).parents("tr").find("td").eq(0).html();
+		id_Rif = $(this).parents("tr").find("td").eq(1).html();
+		denominacionPro = $(this).parents("tr").find("td").eq(2).html();		
+		direccionPro = $(this).parents("tr").find("td").eq(3).html();
+		tlfPro = $(this).parents("tr").find("td").eq(4).html();
+	   
+                                                                   
+		$("#intIdFila").val(id_Rif);
+		$("#rifId").val(id_Rif);		
+		$("#rifId").attr("disabled",true);
+		$("#cbo_rifTipo").val(cbo_rif);
+		$("#cbo_rifTipo").attr("disabled",true);
+		$("#denominacionPro").val(denominacionPro);
+		$("#direccionPro").val(direccionPro);
+		$("#tlfPro").val(tlfPro);
+		
+	});	
+	
+	
+			$("a.tablaProveedorEliminar").click(function(evento)
+					{
+						var intIdFila = $(this).parents("tr").find("td").eq(1).html();
+							
+						$("#EliminarProveedor").dialog( "destroy" );
+						
+						$("#EliminarProveedor").dialog({
+							title: "SICOBIM",
+							resizable: false,
+							bgiframe:true,
+							autoOpen: true,
+							modal: true,
+							buttons:
+							{
+								"Aceptar": function() 
+								{
+									$.ajax
+							        ({
+							        	url: "../controlador/mantenimiento/mantenimientoControl.php?opc=20&id="+intIdFila,
+							        	type: "POST",
+							        	//dataType: "html",
+							        	dataType: "json",
+							        	data:$("#frmRegistrarProveedor").serialize(),
+									
+							        	success: function(datos)
+							        	{
+							        	
+								        	if (datos.error==0)
+						        	  		{  
+								        		$.post("../vista/mantenimiento/registrarProveedor.php",function(data)
+						        				{
+						        					$("#contenido").html(data);
+						        				});	      	  	
+								        	}
+					
+						        	  		if (datos.error==1)
+						        	  		{  
+						
+						        	  			$("#error").html(datos.msj);
+						        	  			$("#error").show();
+						        	  		}
+							        	}
+						        		
+							        });
+									$(this).dialog('close');
+								},
+								"Cancelar": function() 
+								{
+									$(this).dialog('close');
+										
+								}
+							}
+						}).html('¿Está Seguro de Eliminar el Proveedor?');
+					
+					});
+	
+});/* FIN DE $(document).ready(function() */

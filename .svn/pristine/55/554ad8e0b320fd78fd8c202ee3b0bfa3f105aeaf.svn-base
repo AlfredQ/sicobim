@@ -1,0 +1,535 @@
+<?php
+/*
+ * Created 
+ * <Nombre del archivo: > *
+ * <Versión del archivo: 1.0>
+ * <Autor del archivo:>
+ * <Breve explicación del contenido de el archivo:
+ * Modelo de Usuarios del sistema>
+ */
+session_start();
+
+require_once('../../modelo/baseDatos.Class.php');
+class asignacion
+{ 
+//Compras
+private $Id_Acta;
+private $Id_Orden;
+private $Fecha_Orden;
+private $Id_Factura;
+private $Fecha_Factura;
+private $Id_Rif;
+private $Id_Depe;
+private $Id_Direccion;
+private $Id_Unidad;
+private $Id_Coordinacion;
+private $Id_Inve;
+private $Id_SubGrupo;
+private $Id_Seccion;
+private $Id_Producto;
+private $Precio;
+private $Caracteristica;
+private $Fecha;
+private $Id_Usuario;
+private $Radio;
+
+//arreglos conceptos
+private $arrId_Acta= array();
+private $arrId_Orden= array();
+private $arrFecha_Orden= array();
+private $arrId_Factura= array();
+private $arrFecha_Factura= array();
+private $arrId_Rif= array();
+private $arrId_Depe= array();
+private $arrId_Direccion= array();
+private $arrId_Unidad= array();
+private $arrId_Coordinacion= array();
+private $arrId_Inve=array();
+private $arrId_SubGrupo=array();
+private $arrId_Seccion=array();
+private $arrId_Producto=array();
+private $arrPrecio=array();
+private $arrCaracteristica=array();
+private $arrFecha=array();
+private $arrId_Usuario=array();
+private $arrRadio=array();
+
+
+protected $db;
+
+public function __construct( Base $db )
+{
+	$this->db = $db;
+}
+
+/*********************SET ARRAY*********************/
+public function setArrId_Acta($arrId_Acta)
+{
+	array_push($this->arrId_Acta,$arrId_Acta);
+}
+
+public function setArr($arrId_Orden) 
+{
+	array_push($this->arrId_Orden,$arrId_Orden);
+}
+
+public function setArrFechaOrden($arrFechaOrden)
+{
+	array_push($this->arrFecha_Orden,$arrFechaOrden);
+}
+
+public function setArrId_Factura($arrId_Factura) 
+{
+	array_push($this->arrId_Factura,$arrId_Factura);
+}
+
+public function setArrFecha_Factura($arrFecha_Factura) 
+{
+	array_push($this->arrFecha_Factura,$arrFecha_Factura);
+}
+public function setArrId_Rif($arrId_Rif) 
+{
+	array_push($this->arrId_Rif,$arrId_Rif);
+}
+public function setArrId_Depe($arrId_Depe) 
+{
+	array_push($this->arrId_Depe,$arrId_Depe);
+}
+public function setArrId_Direccion($arrId_Direccion) 
+{
+	array_push($this->arrId_Direccion,$arrId_Direccion);
+}
+public function setArrId_Unidad($arrId_Unidad) 
+{
+	array_push($this->arrId_Unidad,$arrId_Unidad);
+}
+public function setArrId_Coordinacion($arrId_Coordinacion) 
+{
+	array_push($this->arrId_Coordinacion,$arrId_Coordinacion);
+}
+public function setArrId_Inve($arrId_Inve) 
+{
+	array_push($this->arrId_Inve,$arrId_Inve);
+}
+public function setArrId_SubGrupo($arrId_SubGrupo) 
+{
+	array_push($this->arrId_SubGrupo,$arrId_SubGrupo);
+}
+public function setArrId_Seccion($arrId_Seccion) 
+{
+	array_push($this->arrId_Seccion,$arrId_Seccion);
+}
+public function setArrId_Producto($arrId_Producto) 
+{
+	array_push($this->arrId_Producto,$arrId_Producto);
+}
+public function setArrPrecio($arrPrecio) 
+{
+	array_push($this->arrPrecio,$arrPrecio);
+}
+public function setArrCaracteristica($arrCaracteristica) 
+{
+	array_push($this->arrCaracteristica,$arrCaracteristica);
+}
+public function setArrFecha($arrFecha) 
+{
+	array_push($this->arrFecha,$arrFecha);
+}
+public function setArrId_Usuario($arrId_Usuario) 
+{
+	array_push($this->arrId_Usuario,$arrId_Usuario);
+}
+public function setArrRadio($arrRadio) 
+{
+	array_push($this->arrRadio,$arrRadio);
+}
+/*********************GET ARRAY*********************/
+public function getArrId_Acta() 
+{
+	return $this->arrId_Acta;
+}
+public function getArrId_Orden()
+{
+	return $this->arrId_Orden;
+}
+public function getArrFecha_Orden()
+{
+	return $this->arrFecha_Orden;
+}
+public function getArrId_Factura()
+{
+	return $this->arrId_Factura;
+}
+public function getArrFecha_Factura()
+{
+	return $this->arrFecha_Factura;
+}
+public function getArrId_Rif()
+{
+	return $this->arrId_Rif;
+}
+public function getArrId_Depe()
+{
+	return $this->arrId_Depe;
+}
+public function getArrId_Direccion()
+{
+	return $this->arrId_Direccion;
+}
+public function getArrId_Unidad()
+{
+	return $this->arrId_Unidad;
+}
+public function getArrId_Coordinacion()
+{
+	return $this->arrId_Coordinacion;
+}
+public function getArrId_Inve()
+{
+	return $this->arrId_Inve;
+}
+public function getArrId_SubGrupo()
+{
+	return $this->arrId_SubGrupo;
+}
+public function getArrId_Seccion()
+{
+	return $this->arrId_Seccion;
+}
+public function getArrId_Producto()
+{
+	return $this->arrId_Producto;
+}
+public function getArrPrecio()
+{
+	return $this->arrPrecio;
+}
+public function getArrCaracteristica()
+{
+	return $this->arrCaracteristica;
+}
+public function getArrFecha()
+{
+	return $this->arrFecha;
+}
+public function getArrId_Usuario()
+{
+	return $this->arrId_Usuario;
+}
+public function getArrRadio()
+{
+	return $this->arrRadio;
+}
+/*********************SET*********************/
+public function setId_Acta($Id_Acta) 
+{
+	$this->Id_Acta = $Id_Acta;
+}
+public function setId_Orden($Id_Orden)
+{
+	$this->Id_Orden = $Id_Orden;
+}
+public function setFecha_Orden($Fecha_Orden)
+{
+	$this->Fecha_Orden = $Fecha_Orden;
+}
+public function setId_Factura($Id_Factura)
+{
+	$this->Id_Factura = $Id_Factura;
+}
+public function setFecha_Factura($Fecha_Factura)
+{
+	$this->Fecha_Factura = $Fecha_Factura;
+}
+public function setId_Rif($Id_Rif)
+{
+	$this->Id_Rif = $Id_Rif;
+}
+public function setId_Depe($Id_Depe)
+{
+	$this->Id_Depe = $Id_Depe;
+}
+public function setId_Direccion($Id_Direccion)
+{
+	$this->Id_Direccion = $Id_Direccion;
+}
+public function setId_Unidad($Id_Unidad)
+{
+	$this->Id_Unidad = $Id_Unidad;
+}
+public function setId_Coordinacion($Id_Coordinacion)
+{
+	$this->Id_Coordinacion = $Id_Coordinacion;
+}
+public function setId_Inve($Id_Inve)
+{
+	$this->Id_Inve = $Id_Inve;
+}
+public function setId_SubGrupo($Id_SubGrupo)
+{
+	$this->Id_SubGrupo = $Id_SubGrupo;
+}
+public function setId_Seccion($Id_Seccion)
+{
+	$this->Id_Seccion = $Id_Seccion;
+}
+public function setId_Producto($Id_Producto)
+{
+	$this->Id_Producto = $Id_Producto;
+}
+public function setPrecio($Precio)
+{
+	$this->Precio = $Precio;
+}
+public function setCaracteristica($Caracteristica)
+{
+	$this->Caracteristica = $Caracteristica;
+}
+public function setFecha($Fecha)
+{
+	$this->Fecha= $Fecha;
+}
+public function setId_Usuario($Id_Usuario)
+{
+	$this->Id_Usuario= $Id_Usuario;
+}
+public function setRadio($Radio)
+{
+	$this->Radio= $Radio;
+}
+/************Get***************/
+public function getId_Acta() 
+{
+	return $this->Id_Acta;
+}
+public function getId_Orden() 
+{
+	return $this->Id_Orden;
+}
+public function getFecha_Orden() 
+{
+	return $this->Fecha_Orden;
+}
+public function getId_Factura() 
+{
+	return $this->Id_Factura;
+}
+public function getFecha_Factura() 
+{
+	return $this->Fecha_Factura;
+}
+public function getId_Rif() 
+{
+	return $this->Id_Rif;
+}
+public function getId_Depe() 
+{
+	return $this->Id_Depe;
+}
+public function getId_Direccion() 
+{
+	return $this->Id_Direccion;
+}
+public function getId_Unidad() 
+{
+	return $this->Id_Unidad;
+}
+public function getId_Coordinacion() 
+{
+	return $this->Id_Coordinacion;
+}
+public function getId_Inve() 
+{
+	return $this->Id_Inve;
+}
+public function getId_SubGrupo() 
+{
+	return $this->Id_SubGrupo;
+}
+public function getId_Seccion() 
+{
+	return $this->Id_Seccion;
+}
+public function getId_Producto() 
+{
+	return $this->Id_Producto;
+}
+public function getPrecio() 
+{
+	return $this->Precio;
+}
+public function getCaracteristica() 
+{
+	return $this->Caracteristica;
+}
+public function getFecha() 
+{
+	return $this->Fecha;
+}
+public function getId_Usuario() 
+{
+	return $this->Id_Usuario;
+}
+public function getRadio() 
+{
+	return $this->Radio;
+}
+/********************************************/
+/*               Funciones                  */
+/********************************************/
+
+/************Registro de Coordinaciones************/
+public function insertarCompra( )
+{  						   
+	$stsFuncion=$this->db->EjecutarVista("fn_i_compra(".$this->getId_Acta().",
+													 '".$this->getId_Orden()."',
+												     ".$this->getFecha_Orden().",
+												     ".$this->getId_Factura().",
+													 ".$this->getFecha_Factura().",
+													 ".$this->getId_Rif().",
+													 ".$this->getId_Depe().",
+													 ".$this->getId_Direccion().",
+													 ".$this->getId_Unidad().",
+													 ".$this->getId_Coordinacion().")");
+	if ($stsFuncion->fields['fn_i_compra']=="t")
+	{//Si se guarda el registro devuelve true
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+
+}//Fin insertar unidades
+
+/*********Insertar bien*********/
+public function insertarInventario()
+{
+	echo ">>>>".$this->getArrId_Inve()."<<<<<";
+	
+	
+die("dm");
+	/*$arregloInventario=array();
+	$contadorBien=0;
+	$banderaInventario=false;
+		foreach( $_POST as $inventario_post => $valor_post){
+			
+			$auxiliar_post=substr($inventario_post,0,16);
+			
+			if($auxiliar_post=='asignaNumeroBien')
+				{
+					$banderaInventario=true;
+					print_r($asignacion->setArrId_Inve($var));
+					
+				}				
+		}*/
+	
+	echo "<pre>";
+		print_r($var['asignaNumeroBien']);
+	echo "</pre>";
+	die('aqui');
+	$cont=0;
+	for ($index = 0; $index < $cont; $index++){
+		$cont=$index+1;
+		print_r($var['asignaNumeroBien']);
+	}
+	
+	die('HELP');
+	
+	echo $this->getId_Inve(); 
+	                         echo "fn_i_inventario (".$this->getId_Inve().",
+													'".$this->getCaracteristica()."',
+													".$this->getPrecio().",
+													'".$this->getId_Usuario()."',
+													".$this->getId_Producto().",
+													".$this->getId_SubGrupo().",
+												    ".$this->getId_Seccion().",
+												    '".$this->getActa()."',
+													'".$this->getRadio()."')";
+	  						  die(); 
+	$stsFuncion=$this->db->EjecutarVista("fn_i_inventario(".$this->getId_Inve().",
+													'".$this->getCaracteristica()."',
+													".$this->getPrecio().",
+													'".$this->getId_Usuario()."',
+													".$this->getId_Producto().",
+													".$this->getId_SubGrupo().",
+												    ".$this->getId_Seccion().",
+												    '".$this->getActa()."',
+													'".$this->getRadio()."')");
+		
+	if ($stsFuncion->fields['fn_i_inventario']=="t")
+	{//Si se guarda el registro devuelve true
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+
+}//Fin insertar unidades
+
+/*************Consultar coordinacion**********************/
+public function ConsultarCoordinacion( $intOpcion )
+{
+	$arrResultado = $this->db->EjecutarQuery("SELECT * FROM sch_sicobim.vista_coordinaciones");
+
+	if ($intOpcion==0)
+	{
+		if ($arrResultado->EOF)
+		{
+			return FALSE;
+		}
+		else //if ($arrResultado->EOF)
+		{
+			while ( !$arrResultado->EOF )
+			{
+				$this->setArrId_Coor($arrResultado->fields['id_coor']);
+				$this->setArrDescripcionCoor($arrResultado->fields['descripcion']);
+				$this->setArrId_Depe($arrResultado->fields['id_depe']);
+				$this->setArrDescripcion($arrResultado->fields['nombredepe']);
+				$this->setArrId_Dire($arrResultado->fields['id_dire']);
+				$this->setArrDescripcionDire($arrResultado->fields['nombredire']);
+				$this->setArrId_Unidad($arrResultado->fields['id_unid']);
+				$this->setArrDescripcionUnidad($arrResultado->fields['unid']);
+				$arrResultado->MoveNext();
+					
+			}	//Fin de while ( !$arrResultado->EOF )
+					
+			//return TRUE;
+		}	//Fin de if ($arrResultado->EOF)
+	}
+	else
+	{
+		return $arrResultado->RecordCount();
+	}
+}	//	fin de consultar Unidad
+
+
+
+/************Modificar de tipo de concepto************/
+public function modificarConceptos()
+{
+	$stsFuncion = "fn_m_conceptos('".$this->getConcepto()."',
+										   '".$this->getDenominacion()."' ,
+										   '".$this->getTipoConcepto()."')";
+
+	$intResultado=$this->db->EjecutarProcedure($stsFuncion);
+
+	if ( $intResultado )
+	{
+		return true;
+
+	}
+	else		//if ( $intResultado )
+	{
+		return false;
+	}			//Fin de if ( $intResultado )
+
+
+}
+ 
+
+
+
+}
+?>

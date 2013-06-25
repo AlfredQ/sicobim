@@ -1,0 +1,150 @@
+/* Caution! Ensure accessibility in print and other media types... */
+/*@media projection, screen { /* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... 
+    .tabs-hide {
+        display: none;
+    }
+}*/
+
+.widget {
+	font-family:Verdana,Arial,sans-serif; font-size: 1.1em;
+}
+
+.widget input, .widget select, .widget textarea, .widget button { 
+	font-family: Vedana,Arial,sans-serif; font-size: 1em;
+}
+.widget-content { 
+	border: 1px solid #aaa; background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333;
+}
+.widget-content a { color: #333333; }
+.widget-header { border: 1px solid #e3a1a1; background: #cc0000 url(images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
+.widget-header a { color: #ffffff; }
+.tabs { padding: .2em; zoom: 1; }
+.tabs .tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
+.tabs .tabs-nav li { 
+	position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0; height:auto;
+}
+.tabs .tabs-nav li a { float: left; text-decoration: none; padding: .5em 1em; }
+.tabs .tabs-nav li.tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
+.tabs .tabs-nav li.tabs-selected a, .tabs .tabs-nav 
+li.state-disabled a, .tabs .tabs-nav li.state-processing a { cursor: text; }
+.tabs .tabs-nav li a, .tabs.tabs-collapsible .tabs-nav li.tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere...*/ 
+.tabs .tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+
+/* Hide useless elements in print layouts... 
+@media print {
+    .tabs-nav {
+        display: none;
+    }
+}*/
+
+/* Skin */
+.tabs-nav {
+	border: 1px solid #e3a1a1;
+	background: #990000 url(../css/custom-theme/images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x;
+	
+	/*background: #cc0000 url(../css/custom-theme/images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x;
+	 background: #990000 url(../css/custom-theme/images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x;
+	* */
+	color: #ffffff; font-weight: bold;
+	font-family: Vedana,Arial,sans-serif; font-size: 1em;
+	list-style: none; position: relative; padding: .2em .2em 0;
+    /*list-style: none;
+    margin: 0;
+    padding: 0 0 0 4px;*/
+}
+/*.tabs-nav:after { /* clearing without presentational markup, IE gets extra treatment 
+    display: block;
+    clear: both;
+    content: " ";
+}*/
+/*.tabs-nav li {
+	border: 1px solid #aaa; background: #ffffff url(../css/custom-theme/images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333;
+	position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding: 0;
+    /*float: left;
+    margin: 0 0 0 1px;
+    min-width: 84px; /* be nice to Opera */
+/*
+}
+.tabs-nav a, .tabs-nav a span {	
+	border: 1px solid #aaa; background: #ffffff url(../css/custom-theme/images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333;
+	float: left; text-decoration: none; padding: .5em 1em;
+	/*background: #cc0000 url(../css/custom-theme/images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x; 
+    display: block;
+    padding: 0 10px;    
+/*    background: url("../css/custom-theme/images/ui-bg_gloss-wave_50_990000_500x100.png");
+}*/
+.tabs-nav a {
+	font-family: Vedana,Arial,sans-serif; font-size: 1em;
+   /* position: relative;
+     top: 1px;
+    z-index: 2;
+    padding-left: 0;
+   color: #27537a;
+    font-size: 12px;
+    font-weight: bold;
+    color: #cc0000;
+   /* line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #aaa; background: #ffffff url(../css/custom-theme/images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333;*/
+   /*	background: #cc0000 url(../css/custom-theme/images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x;
+    white-space: nowrap; /* required in IE 6     
+}
+/*
+.tabs-nav .tabs-selected a {	
+	/*border: 1px solid #aaa; 
+	background: #ffffff url(../css/custom-theme/images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;*/ 
+	/*color: #333333;
+    color: #000;
+}
+.tabs-nav .tabs-selected a, .tabs-nav a:hover, .tabs-nav a:focus, .tabs-nav a:active {
+    background-position: 100% ;
+   
+    outline: 0; /* prevent dotted border in Firefox 
+}
+.tabs-nav a, .tabs-nav .tabs-disabled a:hover, .tabs-nav .tabs-disabled a:focus, .tabs-nav .tabs-disabled a:active {
+    background-position: 100% ;
+}*/
+/*.tabs-nav a span {
+    width: 64px;  IE 6 treats width as min-width 
+    min-width: 64px;
+    height: 18px;  IE 6 treats height as min-height 
+    min-height: 18px;
+    padding-top: 6px;
+    padding-right: 0;
+}
+.tabs-nav a span { /* hide from IE 6 
+    width: auto;
+    height: auto;
+}
+.tabs-nav .tabs-selected a span {
+    padding-top: 7px;
+}
+.tabs-nav .tabs-selected a span, .tabs-nav a:hover span, .tabs-nav a:focus span, .tabs-nav a:active span {
+    background-position: 0 -50px;
+}
+.tabs-nav a span, .tabs-nav .tabs-disabled a:hover span, .tabs-nav .tabs-disabled a:focus span, .tabs-nav .tabs-disabled a:active span {
+    background-position: 0 0;
+}
+.tabs-nav .tabs-selected a:link, .tabs-nav .tabs-selected a:visited, .tabs-nav .tabs-disabled a:link, .tabs-nav .tabs-disabled a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... 
+    cursor: text;
+}
+.tabs-nav a:hover, .tabs-nav a:focus, .tabs-nav a:active { /* @ Opera, we need to be explicit again here now... 
+    cursor: pointer;
+}
+.tabs-nav .tabs-disabled {
+    opacity: .4;
+}
+.tabs-container {
+	/*border: 1px solid #aaa; background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; color: #333333;
+	font-family: Vedana,Arial,sans-serif; font-size: 1em;
+	border-top: 1px solid #97a5b0;x
+    padding: 1em 8px;
+     
+  	background: #fff; /* declare background color for container to avoid distorted fonts in IE while fading 
+}*/
+/*.tabs-loading em {
+    padding: 0 0 0 20px;
+  /*  background: #cc0000 url(images/ui-bg_gloss-wave_65_cc0000_500x100.png) 50% 50% repeat-x;
+  /*  background: url(loading.gif) no-repeat 0 50%;
+}*/
